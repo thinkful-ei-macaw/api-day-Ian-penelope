@@ -84,6 +84,8 @@ const handleEditShoppingItemSubmit = function () {
     event.preventDefault();
     const id = getItemIdFromElement(event.currentTarget);
     const itemName = $(event.currentTarget).find('.shopping-item').val();
+    let itemObject = { name: itemName }
+    api.updateItem(id, itemObject)
     render();
   });
 };
@@ -91,6 +93,10 @@ const handleEditShoppingItemSubmit = function () {
 const handleItemCheckClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
+    let changeItem = store.findById(id);
+    let checked = { checked: !changeItem.checked };
+    api.updateItem(id, checked);
+    store.findAndUpdate(id, checked)
     render();
   });
 };
