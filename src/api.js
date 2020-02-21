@@ -7,7 +7,8 @@ const getItems = function () {
 export default {
   getItems,
   createItem,
-  updateItem
+  updateItem,
+  deleteItem
 }
 
 function createItem(name) {
@@ -32,5 +33,14 @@ function updateItem(id, updateData) {
     },
     'body': JSON.stringify(updateData)
 
+  })
+}
+
+function deleteItem(id) {
+  return fetch(`${BASE_URL}/items/${id}`, {
+    'method': 'DELETE',
+    'headers': {
+      'Content-Type': 'application/json'
+    }
   })
 }
