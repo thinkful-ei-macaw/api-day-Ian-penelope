@@ -1,11 +1,10 @@
-
 import $ from 'jquery';
 
 import 'normalize.css';
 import './index.css';
-import store from './store'
 
 import api from './api';
+import store from './store';
 import shoppingList from './shopping-list';
 
 const main = function () {
@@ -14,11 +13,15 @@ const main = function () {
     .then((items) => {
       items.forEach((item) => store.addItem(item));
       shoppingList.render();
+
+      const item = store.items[0];
+      console.log('current name: ' + item.name);
+      store.findAndUpdate(item.id, { name: 'barbaz' });
+      console.log('new name: ' + item.name);
     });
-    .then(res => res.json())
-  .then(() => console.log('updated!'));
-shoppingList.bindEventListeners();
-shoppingList.render();
+
+  shoppingList.bindEventListeners();
+  shoppingList.render();
 };
 
-$(main)
+$(main);
