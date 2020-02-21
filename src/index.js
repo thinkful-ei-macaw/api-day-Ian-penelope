@@ -15,8 +15,10 @@ const main = function () {
       items.forEach((item) => store.addItem(item));
       shoppingList.render();
     });
-  shoppingList.bindEventListeners();
-  shoppingList.render();
+    .then(res => res.json())
+  .then(() => console.log('updated!'));
+shoppingList.bindEventListeners();
+shoppingList.render();
 };
 
 $(main)

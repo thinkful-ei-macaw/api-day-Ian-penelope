@@ -6,7 +6,8 @@ const getItems = function () {
 
 export default {
   getItems,
-  createItem
+  createItem,
+  updateItem
 }
 
 function createItem(name) {
@@ -19,6 +20,17 @@ function createItem(name) {
       'Content-Type': 'application/json'
     },
     'body': newItem
+
+  })
+}
+
+function updateItem(id, updateData) {
+  return fetch(`${BASE_URL}/items/${id}`, {
+    'method': 'PATCH',
+    'headers': {
+      'Content-Type': 'application/json'
+    },
+    'body': JSON.stringify(updateData)
 
   })
 }
